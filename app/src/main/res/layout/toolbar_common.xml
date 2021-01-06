@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen80"
+    android:elevation="@dimen/dimen4"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="@dimen/dimen30">
+
+    <TextView
+        android:id="@+id/tv_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_marginLeft="@dimen/dimen16"
+        android:layout_marginBottom="@dimen/dimen8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <Button
+        android:id="@+id/button_filter"
+        android:layout_width="@dimen/diemn100"
+        android:layout_height="@dimen/dimen40"
+        android:text="@string/filter"
+        android:textAllCaps="false"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@color/colorWhite"
+        android:layout_marginEnd="@dimen/dimen16"
+        android:layout_marginRight="@dimen/dimen16"
+        android:layout_marginBottom="@dimen/dimen8"
+        android:background="@drawable/backgroud_gradient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
