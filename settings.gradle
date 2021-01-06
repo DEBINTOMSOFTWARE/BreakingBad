@@ -1,0 +1,3 @@
+include ':characters'
+include ':app'
+rootProject.name = "ChallengeGan"
