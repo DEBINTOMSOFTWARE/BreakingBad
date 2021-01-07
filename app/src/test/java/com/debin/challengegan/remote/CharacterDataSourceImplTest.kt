@@ -1,14 +1,14 @@
-package com.debin.challengegan.framework.remote
+package com.debin.challengegan
 
 
 import com.debin.challengegan.characters.domain.CharacterResponseItem
 import com.debin.challengegan.framework.network.ApiService
+import com.debin.challengegan.framework.remote.CharacterDataSourceImpl
 import com.debin.challengegan.framework.remote.utils.CharactersFactory
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Single
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,7 +23,10 @@ class CharacterDataSourceImplTest {
     @Before
     fun setUp() {
         mockApiService = mock()
-        charactersDataSourceImpl = CharacterDataSourceImpl(mockApiService)
+        charactersDataSourceImpl =
+            CharacterDataSourceImpl(
+                mockApiService
+            )
     }
 
     @Test

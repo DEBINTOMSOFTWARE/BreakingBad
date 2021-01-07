@@ -20,7 +20,7 @@
 
     <Button
         android:id="@+id/button_filter"
-        android:layout_width="@dimen/diemn100"
+        android:layout_width="@dimen/dimen100"
         android:layout_height="@dimen/dimen40"
         android:text="@string/filter"
         android:textAllCaps="false"

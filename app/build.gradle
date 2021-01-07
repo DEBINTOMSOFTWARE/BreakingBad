@@ -25,6 +25,10 @@ android {
         }
     }
 
+    buildFeatures{
+        dataBinding = true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -83,6 +87,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    testImplementation "androidx.arch.core:core-runtime:$archCoreVersion"
+    testImplementation "androidx.arch.core:core-testing:$archCoreVersion"
 
     implementation  ("com.nhaarman:mockito-kotlin:$mockitoKotlinVersion") {
         exclude group: 'org.jetbrains.kotlin', module: 'kotlin-reflect'

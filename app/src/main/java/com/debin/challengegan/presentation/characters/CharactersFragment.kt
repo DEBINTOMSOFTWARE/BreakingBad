@@ -5,16 +5,70 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.debin.challengegan.R
+import com.debin.challengegan.databinding.FragmentCharactersBinding
+import com.debin.challengegan.framework.utils.Resource
+import com.debin.challengegan.framework.utils.ResponseListener
+import com.debin.challengegan.presentation.CharactersViewModel
+import kotlinx.android.synthetic.main.fragment_characters.*
+import org.koin.android.viewmodel.ext.android.viewModel
+import retrofit2.Response
 
 class CharactersFragment : Fragment() {
+
+    private lateinit var adapter: CharactersAdapter
+    private lateinit var binding : FragmentCharactersBinding
+    private val viewModel : CharactersViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_characters, container, false)
+        binding = FragmentCharactersBinding.inflate(inflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        bindViews()
+        initViews()
+        observeData()
+    }
+
+    private fun bindViews() {
+        binding.characterViewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+    }
+
+    private fun initViews() {
+      adapter = CharactersAdapter(arrayListOf())
+      rv_characters.adapter = adapter
+    }
+
+    private fun observeData() {
+        viewModel.characterList.observe(viewLifecycleOwner, Observer { result ->
+            when(result) {
+                is Resource.Loading -> {
+                    showProgress()
+                }
+                is Resource.Success -> {
+                    hideProgress()
+                    adapter.updateCharacters(result.result)
+                }
+                is Resource.Error -> {
+                    //can handle error here too
+                    hideProgress()
+                }
+            }
+        })
+    }
+
+    private fun showProgress() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideProgress() {
+        progressBar.visibility = View.GONE
     }
 
 }
