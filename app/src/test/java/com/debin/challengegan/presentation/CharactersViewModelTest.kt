@@ -65,18 +65,40 @@ class CharactersViewModelTest {
     }
 
     @Test
-    fun test_data_emitted_is_DogBreed() {
-        val breed = CharactersFactory.makeCharactersResponse()
-        stubWheneverThenReturn(Single.just(breed))
+    fun test_data_emitted_is_listOf_characters() {
+        val characters = CharactersFactory.makeCharactersResponse()
+        stubWheneverThenReturn(Single.just(characters))
         charactersViewModel.getCharacters()
         val mediatorLiveData = MediatorLiveData<Resource<List<CharacterResponseItem>>>()
         mediatorLiveData.addSource(charactersViewModel.characterList) { result ->
             when(result) {
                 is Resource.Success ->{
-                    val breedResult = result.result
-                    Assert.assertEquals(breed, breedResult)
+                    val result = result.result
+                    Assert.assertEquals(characters, result)
                 }
             }
+        }
+    }
+
+    @Test
+    fun test_data_emitted_is_listOf_Occupation() {
+        val characters = CharactersFactory.makeCharactersResponse()
+         stubWheneverThenReturn(Single.just(characters))
+         charactersViewModel.getCharacters()
+         val mediatorLiveData = MediatorLiveData<List<String>>()
+         mediatorLiveData.addSource(charactersViewModel.characterOccupation) {result ->
+                 Assert.assertEquals(characters.get(0).occupation, result)
+        }
+    }
+
+    @Test
+    fun test_data_emitted_is_listOf_season_apperance() {
+        val characters = CharactersFactory.makeCharactersResponse()
+        stubWheneverThenReturn(Single.just(characters))
+        charactersViewModel.getCharacters()
+        val mediatorLiveData = MediatorLiveData<List<String>>()
+        mediatorLiveData.addSource(charactersViewModel.seasonAppearance) {result ->
+                Assert.assertEquals(characters.get(0).appearance, result)
         }
     }
 

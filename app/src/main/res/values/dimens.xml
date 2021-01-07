@@ -11,4 +11,10 @@
     <dimen name="dimen20sp">20sp</dimen>
     <dimen name="dimen200">200dp</dimen>
     <dimen name="dimen180">180dp</dimen>
+    <dimen name="dimen12">12dp</dimen>
+    <dimen name="dimen1">1dp</dimen>
+    <dimen name="dimen11">11dp</dimen>
+    <dimen name="dimen20">20dp</dimen>
+    <dimen name="dimen6">6dp</dimen>
+    <dimen name="dimen300">300dp</dimen>
 </resources>

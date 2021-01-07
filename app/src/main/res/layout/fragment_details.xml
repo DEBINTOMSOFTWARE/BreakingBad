@@ -1,141 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:bind="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".4" />
+    <data>
+        <variable
+            name="charactersViewModel"
+            type="com.debin.challengegan.presentation.CharactersViewModel" />
+    </data>
 
-    <ImageView
-        android:id="@+id/img_character"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal"/>
+        android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/dimen180" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:elevation="@dimen/dimen4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_name_label"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/name"
-        android:padding="@dimen/dimen8"
-        style="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
-        app:layout_constraintTop_toBottomOf="@+id/guideline_horizontal"/>
+            <include layout="@layout/toolbar_common"
+                bind:charactersViewModel = "@{charactersViewModel}"/>
 
-    <TextView
-        android:id="@+id/tv_occupation_label"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/occupation"
-        android:padding="@dimen/dimen8"
-        style="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name_label"/>
+        </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/tv_status_label"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/status"
-        android:padding="@dimen/dimen8"
-        style="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
-        app:layout_constraintTop_toBottomOf="@+id/tv_occupation_label"/>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingBottom="@dimen/dimen20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-    <TextView
-        android:id="@+id/tv_nickname_label"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/nick_name"
-        android:padding="@dimen/dimen8"
-        style="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
-        app:layout_constraintTop_toBottomOf="@+id/tv_status_label"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_appearance_label"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Season Appearance"
-        android:padding="@dimen/dimen8"
-        style="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nickname_label"/>
-
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:padding="@dimen/dimen8"
-        style="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintStart_toEndOf="@+id/guideline_vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline_horizontal"/>
-
-    <TextView
-        android:id="@+id/tv_occupation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:padding="@dimen/dimen8"
-        style="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintStart_toEndOf="@+id/guideline_vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name"/>
-
-    <TextView
-        android:id="@+id/tv_status"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:padding="@dimen/dimen8"
-        style="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintStart_toEndOf="@+id/guideline_vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_occupation"/>
-
-    <TextView
-        android:id="@+id/tv_nickname"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:padding="@dimen/dimen8"
-        style="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintStart_toEndOf="@+id/guideline_vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_status_label"/>
+                <ImageView
+                    android:id="@+id/img_character"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen300"
+                    android:contentDescription="@string/character_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_seasons"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen16"
-        app:layout_constraintStart_toEndOf="@+id/guideline_vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nickname"/>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_character"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/dimen16"
+                    android:layout_margin="@dimen/dimen16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_character">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <include
+                            android:id="@+id/primary_layout"
+                            layout="@layout/layout_primary_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            bind:charactersViewModel = "@{charactersViewModel}"/>
+
+                        <include
+                            android:id="@+id/secondary_details"
+                            layout="@layout/layout_secondary_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layout_constraintTop_toBottomOf="@+id/primary_layout" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

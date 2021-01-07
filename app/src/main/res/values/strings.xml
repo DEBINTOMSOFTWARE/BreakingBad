@@ -7,4 +7,7 @@
     <string name="occupation">Occupation</string>
     <string name="status">Status</string>
     <string name="nick_name">Nick Name</string>
+    <string name="season_appearance">Season Appearance</string>
+    <string name="image_back">Image back</string>
+    <string name="character_image">Character Image</string>
 </resources>

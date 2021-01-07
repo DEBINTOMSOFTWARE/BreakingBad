@@ -21,6 +21,13 @@ class CharactersFactory {
            return listOf(item1, item2)
        }
 
+        fun getCharacterDetails() : CharacterResponseItem {
+            val character = CharacterResponseItem(listOf(1,2,3), listOf(1,2,3), "09-07-1958", "Breaking Bad", 1,
+                "https://images.amcnetworks.com/amc.com/wp-content/uploads/2015/04/cast_bb_700x1000_walter-white-lg.jpg",
+                "Walter White", "Heisenberg", listOf("High School Chemistry Teacher", "Meth King Pin"), "Bryan Cranston","Presumed dead")
+            return character
+        }
+
        fun makeResponseError() : Throwable {
            return Throwable()
        }

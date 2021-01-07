@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="charactersViewModel"
+            type="com.debin.challengegan.presentation.CharactersViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@{charactersViewModel.characterName}"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_marginTop="@dimen/dimen12"
+        android:layout_marginLeft="@dimen/dimen16"
+        android:layout_marginRight="@dimen/dimen16"
+        android:textColor="@color/textColorDarkBlack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_status"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@{charactersViewModel.characterStatus}"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@color/textColorAlive"
+        android:gravity="end"
+        android:layout_marginTop="@dimen/dimen11"
+        android:layout_marginRight="@dimen/dimen16"
+        android:layout_marginEnd="@dimen/dimen16"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen1"
+        android:background="@color/viewLineColor"
+        android:layout_marginLeft="@dimen/dimen8"
+        android:layout_marginRight="@dimen/dimen8"
+        android:layout_marginTop="@dimen/dimen8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name"/>
+
+
+    <TextView
+        android:id="@+id/tv_nickname_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/nick_name"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@color/textColorDarkBlack"
+        android:layout_marginTop="@dimen/dimen11"
+        android:layout_marginLeft="@dimen/dimen16"
+        android:layout_marginStart="@dimen/dimen16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view1"
+        app:layout_constraintEnd_toStartOf="@+id/tv_nickname"/>
+
+    <TextView
+        android:id="@+id/tv_nickname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@{charactersViewModel.characterNickName}"
+        android:gravity="end"
+        android:layout_marginRight="@dimen/dimen16"
+        android:layout_marginEnd="@dimen/dimen16"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@color/textColorDarkBlack"
+        app:layout_constraintStart_toEndOf="@+id/tv_nickname_label"
+        app:layout_constraintTop_toTopOf="@+id/tv_nickname_label"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_nickname_label"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_occupation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/occupation"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:textSize="@dimen/dimen20sp"
+        android:background="@color/title_background"
+        android:padding="@dimen/dimen16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nickname_label"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_occupation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen16"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_occupation"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

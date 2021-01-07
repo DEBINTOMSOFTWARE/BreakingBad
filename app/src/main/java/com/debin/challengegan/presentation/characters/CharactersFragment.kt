@@ -6,20 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import com.debin.challengegan.R
+import androidx.navigation.fragment.findNavController
 import com.debin.challengegan.databinding.FragmentCharactersBinding
 import com.debin.challengegan.framework.utils.Resource
-import com.debin.challengegan.framework.utils.ResponseListener
 import com.debin.challengegan.presentation.CharactersViewModel
 import kotlinx.android.synthetic.main.fragment_characters.*
-import org.koin.android.viewmodel.ext.android.viewModel
-import retrofit2.Response
+import org.koin.android.viewmodel.ext.android.sharedViewModel
+
 
 class CharactersFragment : Fragment() {
 
     private lateinit var adapter: CharactersAdapter
     private lateinit var binding : FragmentCharactersBinding
-    private val viewModel : CharactersViewModel by viewModel()
+    private val viewModel : CharactersViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +40,10 @@ class CharactersFragment : Fragment() {
     }
 
     private fun initViews() {
-      adapter = CharactersAdapter(arrayListOf())
+      adapter = CharactersAdapter(arrayListOf(), CharactersAdapter.OnCharacterItemClick{
+          viewModel.setCharacterDetails(it)
+         findNavController().navigate(CharactersFragmentDirections.actionCharactersFragmentToDetailsFragment())
+      })
       rv_characters.adapter = adapter
     }
 
