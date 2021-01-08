@@ -27,7 +27,29 @@ class CharactersFragmentTest {
         }
         Espresso.onView(withId(R.id.charactersFragment))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-
     }
+
+    @Test
+    fun test_display_characters_recyclerview_on_launch_page() {
+        val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
+        navController.setGraph(R.navigation.characters_navigation)
+        val senario = launchFragmentInContainer<CharactersFragment>()
+        senario.onFragment {fragment ->
+            Navigation.setViewNavController(fragment.requireView(), navController)
+        }
+        Espresso.onView(withId(R.id.rv_characters))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    @Test
+    fun characterFragmentIsDisplayed() {
+        val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
+        navController.setGraph(R.navigation.characters_navigation)
+        launchFragmentInContainer<CharactersFragment>()
+        Espresso.onView(withId(R.id.rv_characters))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+
 
 }

@@ -14,7 +14,6 @@ import com.debin.challengegan.presentation.CharactersViewModel
 import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.android.synthetic.main.layout_primary_details.*
 import kotlinx.android.synthetic.main.layout_secondary_details.*
-import kotlinx.android.synthetic.main.toolbar_common.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class DetailsFragment : Fragment() {

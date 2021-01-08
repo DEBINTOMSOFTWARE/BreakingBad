@@ -11,7 +11,6 @@ import com.debin.challengegan.characters.domain.CharacterResponseItem
 import com.debin.challengegan.framework.utils.getProgressDrawable
 import com.debin.challengegan.framework.utils.loadImage
 import kotlinx.android.synthetic.main.item_layout_characters.view.*
-import java.lang.NullPointerException
 import java.util.*
 import kotlin.collections.ArrayList
 
