@@ -46,6 +46,7 @@
         android:textAllCaps="false"
         style="@style/TextAppearance.AppCompat.Title"
         android:textColor="@color/colorWhite"
+        android:onClick="@{()-> toolbarHome.filterClick()}"
         android:layout_marginEnd="@dimen/dimen16"
         android:layout_marginRight="@dimen/dimen16"
         android:layout_marginBottom="@dimen/dimen8"

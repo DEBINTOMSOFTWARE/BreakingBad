@@ -11,9 +11,11 @@ import com.debin.challengegan.characters.domain.CharacterResponseItem
 import com.debin.challengegan.framework.utils.getProgressDrawable
 import com.debin.challengegan.framework.utils.loadImage
 import kotlinx.android.synthetic.main.item_layout_characters.view.*
+import java.lang.NullPointerException
 import java.util.*
 import kotlin.collections.ArrayList
 
+private const val TAG = "CharactersAdapter"
 class CharactersAdapter(private var characters: ArrayList<CharacterResponseItem>,
                         private val clickListener: OnCharacterItemClick) :
     RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>(), Filterable {
@@ -23,7 +25,7 @@ class CharactersAdapter(private var characters: ArrayList<CharacterResponseItem>
     init {
         charactersFilterList = characters
     }
-    
+
     fun updateCharacters(newCharacters: List<CharacterResponseItem>) {
         characters.clear()
         characters.addAll(newCharacters)
@@ -60,16 +62,21 @@ class CharactersAdapter(private var characters: ArrayList<CharacterResponseItem>
     }
 
 
-    fun filter(query : CharSequence) : ArrayList<CharacterResponseItem>{
-        val filteredList = mutableListOf<CharacterResponseItem>()
-        if(query.isNotEmpty()) {
-            filteredList.addAll(characters.filter {
-                it.name.toLowerCase(Locale.getDefault()).contains(query.toString().toLowerCase(Locale.getDefault()))
-            })
+    fun seasonBasedFilter(seasons : ArrayList<Int>?) {
+        println("$TAG :: seasons :: $seasons")
+        if(seasons?.isEmpty()!!) {
+            charactersFilterList = characters
         } else {
-            filteredList.addAll(characters)
+            val resultList = ArrayList<CharacterResponseItem>()
+                    for(row in characters) {
+                        if(row.appearance!= null) {
+                        if(row.appearance.any { it in seasons }) {
+                            resultList.add(row)
+                        }}
+                    }
+            charactersFilterList = resultList
+            notifyDataSetChanged()
         }
-        return filteredList as ArrayList<CharacterResponseItem>
     }
 
     override fun getFilter(): Filter {
@@ -94,7 +101,7 @@ class CharactersAdapter(private var characters: ArrayList<CharacterResponseItem>
             filterResults.values = charactersFilterList
             return filterResults
         }
-        @Suppress("UNCHECKED_CAST")
+
         override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
             charactersFilterList = results?.values as ArrayList<CharacterResponseItem>
             notifyDataSetChanged()

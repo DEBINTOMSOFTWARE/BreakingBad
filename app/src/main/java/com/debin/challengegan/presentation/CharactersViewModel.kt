@@ -15,18 +15,20 @@ class CharactersViewModel(private val getCharacters: GetCharacters) : ViewModel(
     val characterName = MutableLiveData<String>()
     val characterNickName = MutableLiveData<String>()
     val characterStatus = MutableLiveData<String>()
-    val _characterImage = MutableLiveData<String>()
+    private val _characterImage = MutableLiveData<String>()
     private val _characterList = MutableLiveData<Resource<List<CharacterResponseItem>>>()
     private val _characterOccupation = MutableLiveData<List<String>>()
     private val _seasonAppearance = MutableLiveData<List<Int>>()
     private val _backClick = MutableLiveData<Boolean>()
     private val _searchClick = MutableLiveData<Boolean>()
+    private val _filterClick = MutableLiveData<Boolean>()
     val characterList : LiveData<Resource<List<CharacterResponseItem>>> get() = _characterList
     val characterOccupation : LiveData<List<String>> get() = _characterOccupation
     val seasonAppearance : LiveData<List<Int>> get() = _seasonAppearance
     val characterImage : LiveData<String> get() = _characterImage
     val backClick : LiveData<Boolean> get() = _backClick
     val searchClick : LiveData<Boolean> get() = _searchClick
+    val filterClick : LiveData<Boolean> get() = _filterClick
 
 
     init {
@@ -37,7 +39,7 @@ class CharactersViewModel(private val getCharacters: GetCharacters) : ViewModel(
         _characterImage.value = ""
         _backClick.value = false
         _searchClick.value = false
-        println("$TAG :: init called")
+        _filterClick.value = false
         getCharacters()
     }
 
@@ -46,24 +48,20 @@ class CharactersViewModel(private val getCharacters: GetCharacters) : ViewModel(
     }
 
     fun setCharacterDetails(characters : CharacterResponseItem) {
-        println("$TAG :: setCharacterDetails called")
         saveCharacterToLive(characters)
     }
 
     private fun saveCharacterToLive(characters: CharacterResponseItem) {
-        println("$TAG :: Name : ${characters.name} , NickName : ${characters.nickname} , Status : ${characters.status}")
         characterName.value = characters.name
         characterNickName.value = characters.nickname
         characterStatus.value = characters.status
         _characterImage.value = characters.img
         _characterOccupation.value = characters.occupation
         _seasonAppearance.value = characters.appearance
-        println("$TAG  :: LiveData:: Name : ${characterName.value} , NickName : ${characterNickName.value} , Status : ${characterStatus.value}")
-
     }
 
     fun onBackClick() {
-      _backClick.value = true
+       _backClick.value = true
     }
 
     fun finishBackClick() {
@@ -78,6 +76,13 @@ class CharactersViewModel(private val getCharacters: GetCharacters) : ViewModel(
         _searchClick.value = false
     }
 
+    fun filterClick() {
+        _filterClick.value = true
+    }
+
+    fun filterClicked() {
+        _filterClick.value = false
+    }
 
     inner class CharactersSubscriber : DisposableSingleObserver<List<CharacterResponseItem>>() {
         override fun onSuccess(characters: List<CharacterResponseItem>) {

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.debin.challengegan.databinding.FragmentCharactersBinding
+import com.debin.challengegan.framework.utils.BottomSheetFragment
 import com.debin.challengegan.framework.utils.Resource
 import com.debin.challengegan.presentation.CharactersViewModel
 import kotlinx.android.synthetic.main.fragment_characters.*
@@ -34,6 +35,7 @@ class CharactersFragment : Fragment() {
         observeData()
         observeSearchClick()
         searchCharacter()
+        observeSeasonFilter()
     }
 
     private fun bindViews() {
@@ -76,6 +78,16 @@ class CharactersFragment : Fragment() {
       })
     }
 
+    private fun observeSeasonFilter() {
+       viewModel.filterClick.observe(viewLifecycleOwner, Observer { filterClicked->
+           if(filterClicked) {
+               showBottomSheetDialog()
+               viewModel.filterClicked()
+           }
+       })
+    }
+
+
     private fun observeData() {
         println("$TAG :: observeData")
         viewModel.characterList.observe(viewLifecycleOwner, Observer { result ->
@@ -101,6 +113,14 @@ class CharactersFragment : Fragment() {
 
     private fun hideProgress() {
         progressBar.visibility = View.GONE
+    }
+
+    private fun showBottomSheetDialog() {
+        val bottomSheetFragment = BottomSheetFragment(BottomSheetFragment.OnFilter{seasonApperance->
+            println("$TAG :: Seasons :: ${seasonApperance.size}")
+            adapter.seasonBasedFilter(seasonApperance)
+        })
+        bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
     }
 
 }

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_top_curved"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dimen20">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:elevation="@dimen/dimen4"
+        android:gravity="center"
+        app:title="@string/apperance_filter"
+        app:titleTextColor="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <CheckBox
+        android:id="@+id/cb_season_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/season_1"
+        android:padding="@dimen/dimen8"
+        android:buttonTint="@color/colorPrimary"
+        android:layout_marginLeft="@dimen/dimen16"
+        android:layout_marginStart="@dimen/dimen16"
+        style="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+
+    <CheckBox
+        android:id="@+id/cb_season_two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/season_2"
+        android:padding="@dimen/dimen8"
+        android:buttonTint="@color/colorPrimary"
+        android:layout_marginLeft="@dimen/dimen16"
+        android:layout_marginStart="@dimen/dimen16"
+        style="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_season_one"/>
+
+    <CheckBox
+        android:id="@+id/cb_season_three"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/season_3"
+        android:padding="@dimen/dimen8"
+        android:buttonTint="@color/colorPrimary"
+        android:layout_marginLeft="@dimen/dimen16"
+        android:layout_marginStart="@dimen/dimen16"
+        style="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_season_two"/>
+
+    <CheckBox
+        android:id="@+id/cb_season_four"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/season_4"
+        android:padding="@dimen/dimen8"
+        android:buttonTint="@color/colorPrimary"
+        android:layout_marginLeft="@dimen/dimen16"
+        android:layout_marginStart="@dimen/dimen16"
+        style="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_season_three"/>
+
+    <CheckBox
+        android:id="@+id/cb_season_five"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/season_5"
+        android:padding="@dimen/dimen8"
+        android:buttonTint="@color/colorPrimary"
+        android:layout_marginLeft="@dimen/dimen16"
+        android:layout_marginStart="@dimen/dimen16"
+        style="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_season_four"/>
+
+        <Button
+            android:id="@+id/button_ok"
+            android:layout_width="@dimen/dimen100"
+            android:layout_height="@dimen/dimen40"
+            android:layout_marginTop="@dimen/dimen20"
+            android:text="@string/ok"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/backgroud_gradient"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cb_season_five"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
