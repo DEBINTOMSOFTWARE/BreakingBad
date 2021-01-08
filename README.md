@@ -16,10 +16,10 @@ Technologies Used for ChallengeGan
 Kotlin (Clean code architecture),
 MVVM architecture,
 ConstrainLayout,
-ViewModel data binding
-Navigation Graph
-Koin Dependency Injection
-jUnit, mock, espresso for unit testing
-RxJava with executor and scheduler
-Retrofit
-Glide for loading images
+ViewModel data binding,
+Navigation Graph,
+Koin Dependency Injection,
+jUnit, mock, espresso for unit testing,
+RxJava with executor and scheduler,
+Retrofit,
+Glide for loading images.
