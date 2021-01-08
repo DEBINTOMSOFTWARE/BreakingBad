@@ -1,10 +1,12 @@
 package com.debin.challengegan.presentation.characters
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.debin.challengegan.R
 import com.debin.challengegan.characters.domain.CharacterResponseItem
@@ -67,12 +69,12 @@ class CharactersAdapter(private var characters: ArrayList<CharacterResponseItem>
             charactersFilterList = characters
         } else {
             val resultList = ArrayList<CharacterResponseItem>()
-                    for(row in characters) {
-                        if(row.appearance!= null) {
-                        if(row.appearance.any { it in seasons }) {
-                            resultList.add(row)
-                        }}
-                    }
+            for(row in characters) {
+                if(row.appearance!= null) {
+                    if(row.appearance.any { it in seasons }) {
+                        resultList.add(row)
+                    }}
+            }
             charactersFilterList = resultList
             notifyDataSetChanged()
         }
@@ -89,17 +91,17 @@ class CharactersAdapter(private var characters: ArrayList<CharacterResponseItem>
                 charactersFilterList = characters
             } else {
                 val resultList = ArrayList<CharacterResponseItem>()
-                for (row in characters) {
-                    if (row.name.toLowerCase(Locale.ROOT).contains(charSearch.toLowerCase(Locale.ROOT))) {
-                        resultList.add(row)
-                    }
+                val filteredList = characters.filter {
+                    it.name.toLowerCase(Locale.ROOT).contains(charSearch.toLowerCase(Locale.ROOT))
                 }
+                resultList.addAll(filteredList)
                 charactersFilterList = resultList
             }
             val filterResults = FilterResults()
             filterResults.values = charactersFilterList
             return filterResults
         }
+
 
         override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
             charactersFilterList = results?.values as ArrayList<CharacterResponseItem>
