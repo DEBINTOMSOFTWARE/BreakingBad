@@ -13,7 +13,7 @@ import com.debin.challengegan.presentation.CharactersViewModel
 import kotlinx.android.synthetic.main.fragment_characters.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
-
+private const val TAG = "CharactersFragment"
 class CharactersFragment : Fragment() {
 
     private lateinit var adapter: CharactersAdapter
@@ -32,14 +32,17 @@ class CharactersFragment : Fragment() {
         bindViews()
         initViews()
         observeData()
+        observeSearchClick()
+        searchCharacter()
     }
 
     private fun bindViews() {
         binding.characterViewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = this
     }
 
     private fun initViews() {
+        println("$TAG :: initViews")
       adapter = CharactersAdapter(arrayListOf(), CharactersAdapter.OnCharacterItemClick{
           viewModel.setCharacterDetails(it)
          findNavController().navigate(CharactersFragmentDirections.actionCharactersFragmentToDetailsFragment())
@@ -47,7 +50,34 @@ class CharactersFragment : Fragment() {
       rv_characters.adapter = adapter
     }
 
+    private fun observeSearchClick() {
+        println("$TAG :: observeSearchClick")
+        viewModel.searchClick.observe(viewLifecycleOwner, Observer { searchClicked->
+            if(searchClicked) {
+                search_view.visibility = View.VISIBLE
+                viewModel.searchClicked()
+            }
+        })
+    }
+
+    private fun searchCharacter() {
+        println("$TAG :: searchCharacter")
+      search_view.setOnQueryTextListener(object :
+          androidx.appcompat.widget.SearchView.OnQueryTextListener {
+          override fun onQueryTextSubmit(query: String): Boolean {
+              return false
+          }
+
+          override fun onQueryTextChange(newText: String): Boolean {
+              adapter.filter.filter(newText)
+              return false
+          }
+
+      })
+    }
+
     private fun observeData() {
+        println("$TAG :: observeData")
         viewModel.characterList.observe(viewLifecycleOwner, Observer { result ->
             when(result) {
                 is Resource.Loading -> {

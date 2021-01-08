@@ -3,16 +3,27 @@ package com.debin.challengegan.presentation.characters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.debin.challengegan.R
 import com.debin.challengegan.characters.domain.CharacterResponseItem
 import com.debin.challengegan.framework.utils.getProgressDrawable
 import com.debin.challengegan.framework.utils.loadImage
 import kotlinx.android.synthetic.main.item_layout_characters.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
-class CharactersAdapter(private val characters: ArrayList<CharacterResponseItem>) :
-    RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>() {
+class CharactersAdapter(private var characters: ArrayList<CharacterResponseItem>,
+                        private val clickListener: OnCharacterItemClick) :
+    RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>(), Filterable {
 
+    var charactersFilterList = ArrayList<CharacterResponseItem>()
+
+    init {
+        charactersFilterList = characters
+    }
+    
     fun updateCharacters(newCharacters: List<CharacterResponseItem>) {
         characters.clear()
         characters.addAll(newCharacters)
@@ -34,11 +45,59 @@ class CharactersAdapter(private val characters: ArrayList<CharacterResponseItem>
         )
     }
 
-    override fun getItemCount(): Int = characters.size
+    override fun getItemCount(): Int = charactersFilterList.size
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
-        val character = characters[position]
+        val character = charactersFilterList[position]
         holder.bindCharacter(character)
+        holder.itemView.setOnClickListener {
+            clickListener.onClick(character)
+        }
+    }
 
+    class OnCharacterItemClick(val clickListener : (character: CharacterResponseItem) -> Unit) {
+        fun onClick(character: CharacterResponseItem) = clickListener(character)
+    }
+
+
+    fun filter(query : CharSequence) : ArrayList<CharacterResponseItem>{
+        val filteredList = mutableListOf<CharacterResponseItem>()
+        if(query.isNotEmpty()) {
+            filteredList.addAll(characters.filter {
+                it.name.toLowerCase(Locale.getDefault()).contains(query.toString().toLowerCase(Locale.getDefault()))
+            })
+        } else {
+            filteredList.addAll(characters)
+        }
+        return filteredList as ArrayList<CharacterResponseItem>
+    }
+
+    override fun getFilter(): Filter {
+        return filter
+    }
+
+    private val filter : Filter = object : Filter() {
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            val charSearch = constraint.toString()
+            if (charSearch.isEmpty()) {
+                charactersFilterList = characters
+            } else {
+                val resultList = ArrayList<CharacterResponseItem>()
+                for (row in characters) {
+                    if (row.name.toLowerCase(Locale.ROOT).contains(charSearch.toLowerCase(Locale.ROOT))) {
+                        resultList.add(row)
+                    }
+                }
+                charactersFilterList = resultList
+            }
+            val filterResults = FilterResults()
+            filterResults.values = charactersFilterList
+            return filterResults
+        }
+        @Suppress("UNCHECKED_CAST")
+        override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+            charactersFilterList = results?.values as ArrayList<CharacterResponseItem>
+            notifyDataSetChanged()
+        }
     }
 }

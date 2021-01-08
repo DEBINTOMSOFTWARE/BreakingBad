@@ -20,16 +20,13 @@ class CharactersViewModel(private val getCharacters: GetCharacters) : ViewModel(
     private val _characterOccupation = MutableLiveData<List<String>>()
     private val _seasonAppearance = MutableLiveData<List<Int>>()
     private val _backClick = MutableLiveData<Boolean>()
-    val characterList : LiveData<Resource<List<CharacterResponseItem>>>
-    get() = _characterList
-    val characterOccupation : LiveData<List<String>>
-    get() = _characterOccupation
-    val seasonAppearance : LiveData<List<Int>>
-    get() = _seasonAppearance
-    val characterImage : LiveData<String>
-    get() = _characterImage
-    val backClick : LiveData<Boolean>
-    get() = _backClick
+    private val _searchClick = MutableLiveData<Boolean>()
+    val characterList : LiveData<Resource<List<CharacterResponseItem>>> get() = _characterList
+    val characterOccupation : LiveData<List<String>> get() = _characterOccupation
+    val seasonAppearance : LiveData<List<Int>> get() = _seasonAppearance
+    val characterImage : LiveData<String> get() = _characterImage
+    val backClick : LiveData<Boolean> get() = _backClick
+    val searchClick : LiveData<Boolean> get() = _searchClick
 
 
     init {
@@ -39,6 +36,7 @@ class CharactersViewModel(private val getCharacters: GetCharacters) : ViewModel(
         characterStatus.value = ""
         _characterImage.value = ""
         _backClick.value = false
+        _searchClick.value = false
         println("$TAG :: init called")
         getCharacters()
     }
@@ -71,6 +69,15 @@ class CharactersViewModel(private val getCharacters: GetCharacters) : ViewModel(
     fun finishBackClick() {
         _backClick.value = false
     }
+
+    fun onSearchIconClick() {
+        _searchClick.value = true
+    }
+
+    fun searchClicked() {
+        _searchClick.value = false
+    }
+
 
     inner class CharactersSubscriber : DisposableSingleObserver<List<CharacterResponseItem>>() {
         override fun onSuccess(characters: List<CharacterResponseItem>) {
