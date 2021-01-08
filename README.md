@@ -13,9 +13,9 @@ cases for data layer, interactors layer, framworklayer and presentation layer. A
 
 Technologies Used for ChallengeGan
 
-Kotlin (Clean code architecture)
-MVVM architecture
-ConstrainLayout
+Kotlin (Clean code architecture),
+MVVM architecture,
+ConstrainLayout,
 ViewModel data binding
 Navigation Graph
 Koin Dependency Injection
