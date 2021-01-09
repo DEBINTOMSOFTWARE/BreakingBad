@@ -86,8 +86,8 @@ class CharactersViewModelTest {
          stubWheneverThenReturn(Single.just(characters))
          charactersViewModel.getCharacters()
          val mediatorLiveData = MediatorLiveData<List<String>>()
-         mediatorLiveData.addSource(charactersViewModel.characterOccupation) {result ->
-                 Assert.assertEquals(characters.get(0).occupation, result)
+         mediatorLiveData.addSource(charactersViewModel.character) {result ->
+                 Assert.assertEquals(characters.get(0).occupation, result.occupation)
         }
     }
 
@@ -97,8 +97,8 @@ class CharactersViewModelTest {
         stubWheneverThenReturn(Single.just(characters))
         charactersViewModel.getCharacters()
         val mediatorLiveData = MediatorLiveData<List<String>>()
-        mediatorLiveData.addSource(charactersViewModel.seasonAppearance) {result ->
-                Assert.assertEquals(characters.get(0).appearance, result)
+        mediatorLiveData.addSource(charactersViewModel.character) {result ->
+                Assert.assertEquals(characters.get(0).appearance, result.occupation)
         }
     }
 
