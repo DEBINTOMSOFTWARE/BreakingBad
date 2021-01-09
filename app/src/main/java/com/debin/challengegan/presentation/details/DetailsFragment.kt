@@ -35,9 +35,7 @@ class DetailsFragment : Fragment() {
           bindViews()
           initAdapter()
           initViews()
-          observeImage()
-          observeOccupation()
-          observeSeasonApperance()
+          observeData()
           onBackClick()
     }
 
@@ -58,22 +56,12 @@ class DetailsFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
     }
 
-    private fun observeImage() {
-        viewModel.characterImage.observe(viewLifecycleOwner, Observer {image ->
-            Glide.with(requireContext()).load(image).into(img_character)
+    private fun observeData() {
+        viewModel.character.observe(viewLifecycleOwner, Observer {character ->
+            Glide.with(requireContext()).load(character.img).into(img_character)
+            occupationAdapter.updateOccupation(character.occupation)
+            seasonAdapter.updateSeasonsAppearance(character.appearance)
         })
-    }
-
-    private fun observeOccupation() {
-       viewModel.characterOccupation.observe(viewLifecycleOwner , Observer { occupationList ->
-           occupationAdapter.updateOccupation(occupationList)
-       })
-    }
-
-    private fun observeSeasonApperance() {
-       viewModel.seasonAppearance.observe(viewLifecycleOwner, Observer { seasonApperanceList ->
-          seasonAdapter.updateSeasonsAppearance(seasonApperanceList)
-       })
     }
 
     private fun onBackClick() {

@@ -47,6 +47,7 @@ class CharactersFragment : Fragment() {
         println("$TAG :: initViews")
       adapter = CharactersAdapter(arrayListOf(), CharactersAdapter.OnCharacterItemClick{
           viewModel.setCharacterDetails(it)
+
          findNavController().navigate(CharactersFragmentDirections.actionCharactersFragmentToDetailsFragment())
       })
       rv_characters.adapter = adapter
@@ -57,7 +58,6 @@ class CharactersFragment : Fragment() {
         viewModel.searchClick.observe(viewLifecycleOwner, Observer { searchClicked->
             if(searchClicked) {
                 search_view.visibility = View.VISIBLE
-                viewModel.searchClicked()
             }
         })
     }
@@ -69,13 +69,18 @@ class CharactersFragment : Fragment() {
           override fun onQueryTextSubmit(query: String): Boolean {
               return false
           }
-
           override fun onQueryTextChange(newText: String): Boolean {
-              adapter.filter.filter(newText)
+              observeSearch(newText)
               return false
           }
 
       })
+    }
+
+    private fun observeSearch(newText : String) {
+        viewModel.filterSearch(newText).observe(viewLifecycleOwner, Observer {
+            adapter.updateCharacters(it)
+        })
     }
 
     private fun observeSeasonFilter() {
@@ -100,7 +105,6 @@ class CharactersFragment : Fragment() {
                     adapter.updateCharacters(result.result)
                 }
                 is Resource.Error -> {
-                    //can handle error here too
                     hideProgress()
                 }
             }
@@ -117,8 +121,9 @@ class CharactersFragment : Fragment() {
 
     private fun showBottomSheetDialog() {
         val bottomSheetFragment = BottomSheetFragment(BottomSheetFragment.OnFilter{seasonApperance->
-            println("$TAG :: Seasons :: ${seasonApperance.size}")
-            adapter.seasonBasedFilter(seasonApperance)
+            viewModel.filterSeasonAppearence(seasonApperance).observe(viewLifecycleOwner, Observer {
+               adapter.updateCharacters(it)
+            })
         })
         bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
     }
