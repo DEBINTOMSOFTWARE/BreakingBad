@@ -30,7 +30,7 @@ class CharacterDataSourceImplTest {
     }
 
     @Test
-    fun verifyGetCgaractersAsyncCalled() {
+    fun verifyGetCharactersAsyncCalled() {
         charactersDataSourceImpl.getCharactersAsync()
         verify(mockApiService).getCharacters()
     }
@@ -54,7 +54,7 @@ class CharacterDataSourceImplTest {
     }
 
     @Test
-    fun getBreedRepository_returns_data() {
+    fun getCharactersRepository_returns_data() {
         val characters = CharactersFactory.makeCharactersResponse()
         stubWheneverThenReturn(Single.just(characters))
         val testObserver = charactersDataSourceImpl.getCharactersAsync().toObservable().test()

@@ -15,12 +15,6 @@ class CharactersAdapter(private var characters: ArrayList<CharacterResponseItem>
                         private val clickListener: OnCharacterItemClick) :
     RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>() {
 
-    var charactersFilterList = ArrayList<CharacterResponseItem>()
-
-    init {
-        charactersFilterList = characters
-    }
-
     fun updateCharacters(newCharacters: List<CharacterResponseItem>) {
         characters.clear()
         characters.addAll(newCharacters)
@@ -42,10 +36,10 @@ class CharactersAdapter(private var characters: ArrayList<CharacterResponseItem>
         )
     }
 
-    override fun getItemCount(): Int = charactersFilterList.size
+    override fun getItemCount(): Int = characters.size
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
-        val character = charactersFilterList[position]
+        val character = characters[position]
         holder.bindCharacter(character)
         holder.itemView.setOnClickListener {
             clickListener.onClick(character)
@@ -55,5 +49,7 @@ class CharactersAdapter(private var characters: ArrayList<CharacterResponseItem>
     class OnCharacterItemClick(val clickListener : (character: CharacterResponseItem) -> Unit) {
         fun onClick(character: CharacterResponseItem) = clickListener(character)
     }
+
+
 
 }
