@@ -1,4 +1,4 @@
-# ChallengeGan
+# Breaking Bad
 The App consists of two screens with below specifications The first screen displays a list of of Breaking Bad characters from the Breaking Bad API (https://breakingbadapi.com/api/characters) and present 
 the result in a scrolling GridView. Tapping a character from the list navigate to the second screen. The second screen will then load with Data: (Image, Name, Occupation, Status
 ,Nickname, Season appearance of selected character. 
@@ -11,7 +11,7 @@ Senario 4 : The user should be able to filter characters by season appearance
 The App was developed in MVVM architecture with android jetpack components to make the project lifecycle aware by following the clean code architecture and added the test 
 cases for data layer, interactors layer, framworklayer and presentation layer. And also added ViewModel testing, fragment , navigation testing.
 
-Technologies Used for ChallengeGan
+Technologies Used for Breaking Bad
 
 Kotlin (Clean code architecture),
 MVVM architecture,
